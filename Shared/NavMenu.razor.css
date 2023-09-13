@@ -1,0 +1,36 @@
+/* NavMenu.razor.css */
+
+/* Style for the Done In Time logo */
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+/* Style for the hamburger menu button */
+.navbar-toggler {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* Style for the navigation links container */
+.collapse {
+    display: none;
+}
+
+.collapse.show {
+    display: block;
+}
+
+/* Style for the navigation links */
+.nav-link {
+    font-size: 1rem;
+    color: #333; /* Adjust color as needed */
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #007bff; /* Adjust hover color as needed */
+}
