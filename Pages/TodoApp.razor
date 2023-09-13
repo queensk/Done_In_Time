@@ -1,0 +1,52 @@
+@page "/"
+<div class="todo-app-container">
+    <h3 class="todo-app-header">TodoApp</h3>
+    <div class="todo-list">
+        <TodoList Items="todoItems" OnSelect="SelectItem" OnDelete="HandleFormDelete" />
+    </div>
+    <div class="todo-form">
+        <TodoForm @ref="todoForm" OnSubmit="HandleFormSubmit" OnDelete="HandleFormDelete" IsEdit="IsEdit" />
+    </div>
+</div>
+
+@code {
+    [Inject]
+    private TodoService TodoService { get; set; }
+
+    private List<TodoItem> todoItems;
+
+    private TodoItem selectedItem = null;
+    private TodoForm todoForm;
+    private bool IsEdit {get; set;}= false;
+    
+    protected override void OnInitialized()
+    {
+        todoItems = TodoService.GetTodoItems();
+    }
+
+    private void SelectItem(TodoItem item)
+    {
+        selectedItem = item;
+        IsEdit = !IsEdit;
+        todoForm.SetItem(item);
+    }
+
+    private void HandleFormSubmit(TodoItem item)
+    {
+        if (!IsEdit)
+        {
+            TodoService.AddTodo(item);
+        }
+        else
+        {
+            TodoService.UpdateTodoItem(item);
+            IsEdit = !IsEdit;
+        }
+    }
+
+    private void HandleFormDelete(TodoItem item)
+    {
+        TodoService.DeleteTodoItem(item);
+        IsEdit = false;
+    }
+}

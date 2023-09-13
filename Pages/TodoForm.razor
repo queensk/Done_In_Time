@@ -1,0 +1,53 @@
+<h3 class="todo-form-header">TodoForm</h3>
+<div class="todo-form-container">
+    <form @onsubmit="HandleSubmit">
+        <div>
+            <label for="title" class="todo-form-label">Title</label>
+            <input id="title" @bind="item.Title" class="todo-form-input" />
+        </div>
+        <div>
+            <label for="isDone" class="todo-form-label">Is Done</label>
+            <input id="isDone" type="checkbox" @bind="item.IsDone" />
+        </div>
+        <div>
+            <button type="submit" class="todo-form-button">@GetButtonLabel()</button>
+            @if (IsEdit)
+            {
+                <button type="button" @onclick="HandleDelete" class="todo-form-button">Delete</button>
+            }
+        </div>
+    </form>
+</div>
+
+@code {
+    [Parameter]
+    public TodoItem item { get; set; } = new TodoItem();
+    [Parameter]
+    public EventCallback<TodoItem> OnSubmit { get; set; }
+    [Parameter]
+    public EventCallback<TodoItem> OnDelete { get; set; }
+    [Parameter]
+    public bool IsEdit {get; set;}
+
+    private async Task HandleSubmit()
+    {
+        await OnSubmit.InvokeAsync(item);
+        item = new TodoItem();
+    }
+
+    private async Task HandleDelete()
+    {
+        await OnDelete.InvokeAsync(item);
+        item = new TodoItem();
+    }
+
+    public void SetItem(TodoItem newItem)
+    {
+        item = newItem;
+    }
+
+    private string GetButtonLabel()
+    {
+        return IsEdit ? "Update" : "Save";
+    }
+}

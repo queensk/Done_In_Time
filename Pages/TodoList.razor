@@ -1,0 +1,42 @@
+<h3 class="todo-list-header">TodoList</h3>
+<table class="todo-list-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Is Done</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Items)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.IsDone</td>
+                <td>
+                    <button class="todo-list-button" @onclick="() => EditItem(item)">Edit</button>
+                    <button class="todo-list-button" @onclick="()=> HandleDelete(item)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public List<TodoItem>? Items { get; set; }
+
+    [Parameter]
+    public EventCallback<TodoItem> OnSelect { get; set; }
+    [Parameter]
+    public EventCallback<TodoItem> OnDelete { get; set; }
+
+    public void EditItem(TodoItem item)
+    {
+        OnSelect.InvokeAsync(item);
+    }
+    private async Task HandleDelete(TodoItem item)
+    {
+        await OnDelete.InvokeAsync(item);
+    }
+}

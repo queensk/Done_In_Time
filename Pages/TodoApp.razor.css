@@ -1,0 +1,42 @@
+/* TodoApp.razor.css */
+
+.todo-app-container {
+    background-color: #f0f0f0;
+    padding: 1rem;
+}
+
+.todo-app-header {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.todo-list {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todo-form {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+}
+
+.todo-app-button {
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.todo-app-button:hover {
+    background-color: #0056b3;
+}
